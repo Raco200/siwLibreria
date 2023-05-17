@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Film</title>
+	<link rel="stylesheet" href="/css/stile.css" />
+</head>
+
+<body>
+
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+	<h1>Film</h1>
+	<div th:if="${books.isEmpty()}">Non ci sono film nel sistema</div>
+	<ul>
+		<li th:each="book : ${books}">
+			<span th:text="${book.title} + ' (' + ${book.year} + ')'">Up! (2000)</span>
+			<a th:href="@{'/formRecensione' + '/' + ${book.id} + '/' + ${#request.userPrincipal.principal.username}}">Scrivi recensione</a>
+		</li>
+	</ul>
+</body>
+
+</html>
