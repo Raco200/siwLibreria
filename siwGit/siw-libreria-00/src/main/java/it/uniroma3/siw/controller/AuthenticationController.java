@@ -20,40 +20,45 @@ import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.StudentService;
 @Controller
 public class AuthenticationController {
-	
+
 	@Autowired
 	private CredentialsService credentialsService;
-	
+
 	@Autowired
 	private StudentService studentService;
-	
+
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
-		
-		 
+
+
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
 		return "formRegisterUser";
 	}
-	
-	@PostMapping(value = { "/register" })
-    public String registerUser(@Valid @ModelAttribute("user") User user,
-                 BindingResult userBindingResult, @Valid
-                 @ModelAttribute("credentials") Credentials credentials,
-                 BindingResult credentialsBindingResult,
-                 Model model) {
 
-		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors() && (studentService.getById(user.getMatricolaStudente())!=null|| user.getMatricolaStudente()==0)) {
-            credentials.setUser(user);
-            user.setStudent(studentService.getById(user.getMatricolaStudente()));
-            credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
-            return "registrationSuccessful";
-        }
-        return "registerUser";
-    }
-	
+	@PostMapping(value = { "/register" })
+	public String registerUser(@Valid @ModelAttribute("user") User user,
+			BindingResult userBindingResult, @Valid
+			@ModelAttribute("credentials") Credentials credentials,
+			BindingResult credentialsBindingResult,
+			Model model) {
+
+		if(user.getMatricolaStudente()==null)
+			user.setStudent(null);
+		else
+			if(studentService.getById(user.getMatricolaStudente())!=null)
+				user.setStudent(studentService.getById(user.getMatricolaStudente()));
+			else
+				return "registerUser";
+		if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+			credentials.setUser(user);
+			credentialsService.saveCredentials(credentials);
+			model.addAttribute("user", user);
+			return "registrationSuccessful";
+		}
+		return "registerUser";
+	}
+
 	@GetMapping(value = "/login") 
 	public String showLoginForm (Model model) {
 		return "formLogin";
@@ -63,7 +68,7 @@ public class AuthenticationController {
 	public String index(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof AnonymousAuthenticationToken) {
-	        return "index.html";
+			return "index.html";
 		}
 		else {		
 			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -72,19 +77,19 @@ public class AuthenticationController {
 				return "admin/indexAdmin.html";
 			}
 		}
-        return "index.html";
+		return "index.html";
 	}
-		
-    @GetMapping(value = "/success")
-    public String defaultAfterLogin(Model model) {
-        
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
-    	if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
-            return "admin/indexAdmin.html";
-        }
-        return "index.html";
-    }
 
-	
+	@GetMapping(value = "/success")
+	public String defaultAfterLogin(Model model) {
+
+		UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credentials credentials = credentialsService.getCredentials(userDetails.getUsername());
+		if (credentials.getRole().equals(Credentials.ADMIN_ROLE)) {
+			return "admin/indexAdmin.html";
+		}
+		return "index.html";
+	}
+
+
 }
