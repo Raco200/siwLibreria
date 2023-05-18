@@ -29,10 +29,10 @@ public class AuthenticationController {
 	
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
-		String matricola = null;
+		
+		 
 		model.addAttribute("user", new User());
 		model.addAttribute("credentials", new Credentials());
-		model.addAttribute("matricola", matricola);
 		return "formRegisterUser";
 	}
 	
@@ -40,16 +40,13 @@ public class AuthenticationController {
     public String registerUser(@Valid @ModelAttribute("user") User user,
                  BindingResult userBindingResult, @Valid
                  @ModelAttribute("credentials") Credentials credentials,
-                 @ModelAttribute("matricola") String matricola,
                  BindingResult credentialsBindingResult,
                  Model model) {
 
-        long matricolaLong = Integer.parseInt(matricola);
-
 		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors() && (studentService.getById(matricolaLong)!=null|| matricola==null)) {
+        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors() && (studentService.getById(user.getMatricolaStudente())!=null|| user.getMatricolaStudente()==0)) {
             credentials.setUser(user);
-            user.setStudent(studentService.getById(matricolaLong));
+            user.setStudent(studentService.getById(user.getMatricolaStudente()));
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";

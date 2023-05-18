@@ -33,7 +33,7 @@ public class BookController {
 
 	@PostMapping("/libri")
 	public String newMovie (@ModelAttribute("book")Book book,Model model) {
-		if(!libreriaRepository.existsBookByTitleAndISBN(book.getTitle(),book.getISBN())) {
+		if(!libreriaRepository.existsBookByTitleAndISBN(book.getTitle(),book.getiSBN())) {
 			this.libreriaRepository.save(book);
 			model.addAttribute("book",book);
 			return "Book.html";

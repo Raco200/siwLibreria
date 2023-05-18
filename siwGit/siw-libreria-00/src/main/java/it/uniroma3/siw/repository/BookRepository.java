@@ -8,9 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface BookRepository extends CrudRepository<Book,Long> {
 	
-	public boolean existsBookByTitleAndISBN(String title,String isbn);
+	public boolean existsBookByTitleAndISBN(String title,String ISBN);
 	
-	public List<Book> findByISBN (String isbn);
+	public List<Book> findByISBN (String ISBN);
 	
 	public List<Book> findByTitle (String title);
 	

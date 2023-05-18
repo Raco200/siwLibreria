@@ -18,7 +18,7 @@ public class BookService {
 	BookRepository bookRepository;
 
 	@Transactional
-	public Object getAll() {
+	public List<Book> getAll() {
 		List<Book> result = new ArrayList<>();
       Iterable<Book> iterable = this.bookRepository.findAll();
       for(Book book : iterable)
@@ -34,4 +34,12 @@ public class BookService {
 //            result.add(user);
 //        return result;
 //    }
+	
+	
+	@Transactional
+	public Book getById(Long id) {
+		return bookRepository.findById(id).get();
+	}
+	
+	
 }

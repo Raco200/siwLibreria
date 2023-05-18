@@ -10,7 +10,7 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
-	private String ISBN;
+	private String iSBN;
 	private String categoria;
 	private String urlImage;
 	@OneToMany(mappedBy="book")
@@ -37,16 +37,16 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getISBN() {
-		return ISBN;
+	public String getiSBN() {
+		return iSBN;
 	}
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setiSBN(String iSBN) {
+		this.iSBN = iSBN;
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(ISBN, title);
+		return Objects.hash(iSBN, title);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -57,7 +57,7 @@ public class Book {
 		if (getClass() != obj.getClass())
 			return false;
 		Book other = (Book) obj;
-		return Objects.equals(ISBN, other.ISBN) && Objects.equals(title, other.title);
+		return Objects.equals(iSBN, other.iSBN) && Objects.equals(title, other.title);
 	}
 	public String getCategoria() {
 		return categoria;

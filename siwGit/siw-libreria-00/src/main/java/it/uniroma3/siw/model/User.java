@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 @Table(name = "users") // cambiamo nome perchè in postgres user e' una parola riservata
 public class User {
@@ -18,10 +20,19 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
-
+	private Long matricolaStudente;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Student student;
 	
+	
+	public Long getMatricolaStudente() {
+		return matricolaStudente;
+	}
+
+	public void setMatricolaStudente(Long matricolaStudente) {
+		this.matricolaStudente = matricolaStudente;
+	}
+
     public Student getStudent() {
 		return student;
 	}

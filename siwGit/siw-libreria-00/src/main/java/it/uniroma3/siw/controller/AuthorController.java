@@ -7,17 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import it.uniroma3.siw.model.Author;
-import it.uniroma3.siw.model.Book;
 import it.uniroma3.siw.repository.AuthorRepository;
-import it.uniroma3.siw.repository.BookRepository;
+import it.uniroma3.siw.service.BookService;
 
 @Controller
 public class AuthorController {
 	@Autowired AuthorRepository authorRepository;
-	@Autowired BookRepository bookRepository;
+	@Autowired BookService bookService;
 	
 	
 	@GetMapping("/formNewAuthor")
@@ -41,9 +38,9 @@ public class AuthorController {
 	}
 	
 	@GetMapping("/authorsToAdd/{idBook}")
-	public String getAllAuthors (Model model,@PathVariable("idBook")Long idbook) {
+	public String getAllAuthors (Model model,@PathVariable("idBook")Long idBook) {
 		model.addAttribute("authors",this.authorRepository.findAll());
-		model.addAttribute("book",this.bookRepository.findById(idbook).get());
+		model.addAttribute("book",this.bookService.getById(idBook));
 		return "authorsToAdd.html";
 	}
 	@GetMapping("/Author/{id}")

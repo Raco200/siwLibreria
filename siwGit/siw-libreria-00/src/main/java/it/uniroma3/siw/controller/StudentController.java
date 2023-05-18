@@ -7,14 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import it.uniroma3.siw.model.Author;
-import it.uniroma3.siw.model.Book;
 import it.uniroma3.siw.model.Student;
-import it.uniroma3.siw.repository.AuthorRepository;
-import it.uniroma3.siw.repository.BookRepository;
-
 import it.uniroma3.siw.repository.StudentRepository;
 
 @Controller
