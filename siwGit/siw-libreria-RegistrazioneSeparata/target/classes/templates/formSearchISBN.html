@@ -7,9 +7,9 @@
 
 <body>
 	<div><a href="/"><img src="/libreria-logo.jpg" width="50%"/></a></div>
-	<h1>Cerca libro con ISBN</h1>
+	<h1>Cerca libro con isbn</h1>
 	<form th:action="@{/searchBooks}" method="post">
-		<div>ISBN : <input type="text" th:value="${ISBN}" name="ISBN" />
+		<div>isbn : <input type="text" th:value="${isbn}" name="isbn" />
 		</div>
 		<div><input type="submit" /></div>
 	</form>

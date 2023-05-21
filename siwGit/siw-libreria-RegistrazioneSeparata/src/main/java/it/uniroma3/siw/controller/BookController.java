@@ -33,7 +33,7 @@ public class BookController {
 
 	@PostMapping("/libri")
 	public String newMovie (@ModelAttribute("book")Book book,Model model) {
-		if(!libreriaRepository.existsBookByTitleAndISBN(book.getTitle(),book.getiSBN())) {
+		if(!libreriaRepository.existsBookByTitleAndIsbn(book.getTitle(),book.getIsbn())) {
 			this.libreriaRepository.save(book);
 			model.addAttribute("book",book);
 			return "Book.html";
@@ -65,13 +65,13 @@ public class BookController {
 		model.addAttribute("libri",this.libreriaRepository.findByTitle(title));
 		return "foundBooks.html";}
 	
-	@GetMapping ("/formSearchISBN")
+	@GetMapping ("/formSearchisbn")
 	public String formSearchBook() {
-		return "formSearchISBN.html";
+		return "formSearchisbn.html";
 	}
 	@PostMapping("/searchBooks")
-	public String searchBooks(Model model,@RequestParam String ISBN) {
-		model.addAttribute("libri",this.libreriaRepository.findByISBN(ISBN));
+	public String searchBooks(Model model,@RequestParam String isbn) {
+		model.addAttribute("libri",this.libreriaRepository.findByIsbn(isbn));
 		return "foundBooks.html";
 	}
 	@GetMapping("/delete")

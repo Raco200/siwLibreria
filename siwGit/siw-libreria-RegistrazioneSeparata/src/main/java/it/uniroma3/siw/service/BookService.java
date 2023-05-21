@@ -26,6 +26,15 @@ public class BookService {
       return result;
 	}
 	
+	@Transactional
+	public List<Book> getAllNonInPrestito() {
+		List<Book> result = new ArrayList<>();
+      Iterable<Book> iterable = this.bookRepository.findByPrestito(null);
+      for(Book book : iterable)
+          result.add(book);
+      return result;
+	}
+	
 //	@Transactional
 //    public List<User> getAllUsers() {
 //        List<User> result = new ArrayList<>();

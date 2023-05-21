@@ -10,7 +10,7 @@
     <div th:if="${book}">
 		<form th:action="@{/delete}" method="get">
 	    <h1 th:text="${book.title}">Dettagli Libro</h1>
-        <div>ISBN : <span th:text="'(' + ${book.ISBN} + ')'">2000</span></div>
+        <div>isbn : <span th:text="'(' + ${book.isbn} + ')'">2000</span></div>
         <div>Categoria : <span th:text="'(' + ${book.categoria} + ')'"></span></div>
         <span><img width="30%" th:src=${book.urlImage} /></span>
         <div th:if="${book.autore}">

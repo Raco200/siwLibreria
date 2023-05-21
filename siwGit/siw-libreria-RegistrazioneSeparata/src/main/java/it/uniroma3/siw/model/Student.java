@@ -16,6 +16,12 @@ public class Student {
 	@OneToMany(mappedBy="student")
 	private List<Prestito> prestiti;
 	
+	public List<Prestito> getPrestiti() {
+		return prestiti;
+	}
+	public void setPrestiti(List<Prestito> prestiti) {
+		this.prestiti = prestiti;
+	}
 	public Long getMatricola() {
 		return matricola;
 	}

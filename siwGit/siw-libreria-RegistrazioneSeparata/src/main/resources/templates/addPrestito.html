@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Autore</title>
+    <title>Prestiti</title>
 	<link rel="stylesheet" href="/stile.css?version=2" />
 </head>
 
@@ -11,8 +11,8 @@
 	<div th:if="${books.isEmpty()}">Non ci sono libri nel sistema</div>
 	<ul>
 		<li th:each="book : ${books}">
-			<span th:text="${book.title} + ' (' + ${book.year} + ')'">Up! (2000)</span>
-			<a th:href="@{'/formPrestito' + '/' + ${book.id} + '/' + ${#request.userPrincipal.principal.username}}">Scrivi recensione</a>
+			<span th:text="${book.title} + ' (' + ${book.isbn} + ')'">Up! (2000)</span>
+			<a th:href="@{'/formPrestito' + '/' + ${book.id} + '/' + ${#request.userPrincipal.principal.username}}">Prendi in prestito</a>
 		</li>
 	</ul>
 </body>

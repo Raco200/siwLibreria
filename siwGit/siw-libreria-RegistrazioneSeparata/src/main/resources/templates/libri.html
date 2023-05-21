@@ -13,7 +13,7 @@
 	<ul>
 		<li th:each="book : ${libri}">
 			<a th:href="@{'/libri' + '/' + ${book.id}}"
-				th:text="${book.title} + ' (' + ${book.ISBN} + ')'">Ricerca Operativa (9872038204)</a>
+				th:text="${book.title} + ' (' + ${book.isbn} + ')'">Ricerca Operativa (9872038204)</a>
 		</li>
 	</ul>
 </body>
