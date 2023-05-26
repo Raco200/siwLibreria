@@ -9,14 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Prestito {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataInizio;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataFine;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataRestituzione;
 	@OneToOne
 	private Book book;

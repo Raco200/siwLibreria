@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Student {
 	@Id
@@ -12,6 +14,7 @@ public class Student {
 	private String nome;
 	private String cognome;
 	private String CF;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	@OneToMany(mappedBy="student")
 	private List<Prestito> prestiti;
