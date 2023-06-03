@@ -41,20 +41,6 @@
 				th:style="'color:red'">
 			</span>
 		</div>
-		
-		<div>
-			<label>Role :</label>
-			<span>
-				
-				<datalist id="role">
-					<option th:value="${credentials.DEFAULT_ROLE}"/>
-					<option th:value="${credentials.ADMIN_ROLE}"/>
-				</datalist>
-				<input list="role"placeholder="role"required th:field="${credentials.role}" />
-			</span>
-			
-		</div>
-		
 		<div>
 			<label>Nome</label>
 			<span><input type="text" placeholder="name" required th:field="${user.name}" /></span>

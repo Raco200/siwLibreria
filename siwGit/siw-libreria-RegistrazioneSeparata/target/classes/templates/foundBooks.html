@@ -3,7 +3,7 @@
 
 <head>
 	<title>Libro</title>
-	<link rel="stylesheet" href="/stile.css?version=2" />
+<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
@@ -13,7 +13,7 @@
 	<ul th:if="${!libri.isEmpty()}">
 		<li th:each="book : ${libri}">
 			<a href="book.html" th:href="@{'/libri' + '/' + ${book.id}}"
-				th:text="${book.title} + ' (' + ${book.ISBN}+')'">Romanzo (89820983)</a>
+				th:text="${book.title} + ' (' + ${book.isbn}+')'">Romanzo (89820983)</a>
 		</li>
 	</ul>
 </body>

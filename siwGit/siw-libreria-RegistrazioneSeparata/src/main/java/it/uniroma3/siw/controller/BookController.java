@@ -19,42 +19,42 @@ import javax.transaction.Transactional;
 public class BookController {
 	@Autowired BookRepository libreriaRepository;
 	@Autowired AuthorRepository authorRepository;
-	
+
 	@GetMapping("/index")
 	public String index() {
 		return "index.html";
 	}
-	
-	@GetMapping("/formNewBook")
+
+	@GetMapping("/admin/formNewBook")
 	public String fromNewBook(Model model) {
 		model.addAttribute("book",new Book());
-		return "formNewBook.html";
+		return "admin/formNewBook.html";
 	}
 
-	@PostMapping("/libri")
+	@PostMapping("/admin/libri")
 	public String newMovie (@ModelAttribute("book")Book book,Model model) {
 		if(!libreriaRepository.existsBookByTitleAndIsbn(book.getTitle(),book.getIsbn())) {
 			this.libreriaRepository.save(book);
 			model.addAttribute("book",book);
-			return "Book.html";
+			return "admin/Book.html";
 		}
 		else {
 			model.addAttribute("messaggioErrore","Questo libro esiste già");
-			return "formNewBook.html";
-			
+			return "admin/formNewBook.html";
+
 		}
-		
-		
+
+
 	}
-	@GetMapping("/libri/{Id}")
+	@GetMapping("admin/libri/{Id}")
 	public String getBook (@PathVariable("Id")Long id , Model model) {
 		model.addAttribute("book",this.libreriaRepository.findById(id).get());
-		return "Book.html";
+		return "admin/Book.html";
 	}
-	@GetMapping("/libri")
+	@GetMapping("/admin/libri")
 	public String libri (Model model) {
 		model.addAttribute("libri",this.libreriaRepository.findAll());
-		return "libri.html";
+		return "admin/libri.html";
 	}
 	@GetMapping ("/formSearchTitle")
 	public String formSearchTitle() {
@@ -64,8 +64,8 @@ public class BookController {
 	public String searchTitle (Model model,@RequestParam String title) {
 		model.addAttribute("libri",this.libreriaRepository.findByTitle(title));
 		return "foundBooks.html";}
-	
-	@GetMapping ("/formSearchisbn")
+
+	@GetMapping ("/formSearchISBN")
 	public String formSearchBook() {
 		return "formSearchisbn.html";
 	}
@@ -74,15 +74,15 @@ public class BookController {
 		model.addAttribute("libri",this.libreriaRepository.findByIsbn(isbn));
 		return "foundBooks.html";
 	}
-	@GetMapping("/delete")
+	@GetMapping("/admin/delete")
 	public String deleteBook(Model model,@RequestParam Long id) {
 		this.libreriaRepository.deleteById(id);
 		model.addAttribute("libri",this.libreriaRepository.findAll());
-		return "libri.html";
+		return "admin/libri.html";
 	}
-	
+
 	@Transactional
-	@GetMapping("/authorsToAdd/{idAuthor}/{idBook}")
+	@GetMapping("/admin/authorsToAdd/{idAuthor}/{idBook}")
 	public String addAuthorToBook(Model model,@PathVariable("idAuthor")Long idauthor,@PathVariable("idBook")Long idbook) {
 		Book book=this.libreriaRepository.findById(idbook).get();
 		Author author=this.authorRepository.findById(idauthor).get();
@@ -91,7 +91,18 @@ public class BookController {
 		this.authorRepository.save(author);
 		this.libreriaRepository.save(book);
 		model.addAttribute("book",book);
-		
-		return ("Book.html");
+
+		return ("admin/Book.html");
+	}
+	@GetMapping("/books")
+	public String books(Model model) {
+		model.addAttribute("books",this.libreriaRepository.findAll());
+		return "books.html";
+	}
+
+	@GetMapping("/book/{Id}")
+	public String Book (@PathVariable("Id")Long id , Model model) {
+		model.addAttribute("book",this.libreriaRepository.findById(id).get());
+		return "book.html";
 	}
 }

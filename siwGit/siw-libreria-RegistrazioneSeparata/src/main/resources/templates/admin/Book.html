@@ -7,17 +7,20 @@
 
 <body>
 	<div><a href="/"><img src="/libreria-logo.jpg" width="50%"/></a></div>
-    <div th:if="${book}">	
+    <div th:if="${book}">
+		<form th:action="@{/admin/delete}" method="get">
 	    <h1 th:text="${book.title}">Dettagli Libro</h1>
         <div>isbn : <span th:text="'(' + ${book.isbn} + ')'">2000</span></div>
         <div>Categoria : <span th:text="'(' + ${book.categoria} + ')'"></span></div>
         <span><img width="30%" th:src=${book.urlImage} /></span>
         <div th:if="${book.autore}">
-        Autore : <a th:href="@{'/author'+'/'+${book.autore.getId()}}" th:text="${book.autore.getNome()}+' '+${book.autore.getCognome()}">Pinco Pallino</a>
+        Autore : <a th:href="@{'/admin/Author'+'/'+${book.autore.getId()}}" th:text="${book.autore.getNome()}+' '+${book.autore.getCognome()}">Pinco Pallino</a>
         </div>
         <div th:unless="${book.autore}">
-			Autore non inserito
+			Autore : <a th:href="@{'/admin'+'/authorsToAdd'+'/'+${book.id}}" text="Aggiungi Autore">Aggiungi Autore</a>
 		</div>
+       <div><button type="Long" th:value=${book.id} name="id" >Delete</button></div>
+       </form>
     </div>
     <div th:unless="${book}">Non esiste</div>
   </body>

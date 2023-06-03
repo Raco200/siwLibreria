@@ -82,6 +82,7 @@ public class AuthenticationController {
 			Model model) {
 
 		if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+			credentials.setRole(Credentials.ADMIN_ROLE);
 			user.setStudent(null);
 			credentials.setUser(user);
 			credentialsService.saveCredentials(credentials);

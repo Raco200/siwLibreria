@@ -17,36 +17,42 @@ public class AuthorController {
 	@Autowired BookService bookService;
 	
 	
-	@GetMapping("/formNewAuthor")
+	@GetMapping("/admin/formNewAuthor")
 	public String fromNewAuthor(Model model) {
 		model.addAttribute("author",new Author());
-		return "formNewAuthor.html";
+		return "admin/formNewAuthor.html";
 	}
 	
-	@PostMapping("/Author")
+	@PostMapping("admin/Author")
 	public String newAuthore(@ModelAttribute("author")Author author,Model model) {
 		if(!authorRepository.existsAuthorByNomeAndCognome(author.getNome(),author.getCognome())) {
 			this.authorRepository.save(author);
 			model.addAttribute("author",author);
-			return "Author.html";
+			return "admin/Author.html";
 		}
 		else {
 			model.addAttribute("messaggioErrore","Questo libro esiste già");
-			return "formNewAuthor.html";
+			return "admin/formNewAuthor.html";
 			
 		}
 	}
 	
-	@GetMapping("/authorsToAdd/{idBook}")
+	@GetMapping("/admin/authorsToAdd/{idBook}")
 	public String getAllAuthors (Model model,@PathVariable("idBook")Long idBook) {
 		model.addAttribute("authors",this.authorRepository.findAll());
 		model.addAttribute("book",this.bookService.getById(idBook));
-		return "authorsToAdd.html";
+		return "admin/authorsToAdd.html";
 	}
-	@GetMapping("/Author/{id}")
+	@GetMapping("/admin/Author/{id}")
 	public String getAuthor(Model model,@PathVariable("id")Long id) {
 		model.addAttribute("author",this.authorRepository.findById(id).get());
 		return "Author.html";
+	}
+	
+	@GetMapping("/author/{id}")
+	public String author(Model model,@PathVariable("id")Long id) {
+		model.addAttribute("author",this.authorRepository.findById(id).get());
+		return "author.html";
 	}
 	
 }

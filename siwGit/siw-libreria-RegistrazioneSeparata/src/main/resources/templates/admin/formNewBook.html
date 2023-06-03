@@ -5,13 +5,13 @@
 	<title>
 		New Book
 	</title>
-	<link rel="stylesheet" href="/stile.css?version=3" />
+<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
 	<div><a href="/"><img src="/libreria-logo.jpg" width="50%"/></a></div>
 	<h1>Aggiungi un Libro</h1>
-	<form th:action="@{/libri}" method="POST" th:object="${book}">
+	<form th:action="@{/admin/libri}" method="POST" th:object="${book}">
 		<div>
 			<span th:text="${messaggioErrore}">Errore</span>
 		</div>

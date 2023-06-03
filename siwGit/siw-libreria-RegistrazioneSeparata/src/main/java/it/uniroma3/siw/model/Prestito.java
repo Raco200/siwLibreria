@@ -21,8 +21,6 @@ public class Prestito {
 	private LocalDate dataInizio;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataFine;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate dataRestituzione;
 	@OneToOne
 	private Book book;
 	@ManyToOne
@@ -74,12 +72,5 @@ public class Prestito {
 	public void setDataFine(LocalDate dataFine) {
 		this.dataFine = dataFine;
 	}
-	public LocalDate getDataRestituzione() {
-		return dataRestituzione;
-	}
-	public void setDataRestituzione(LocalDate dataRestituzione) {
-		this.dataRestituzione = dataRestituzione;
-	}
-
 
 }

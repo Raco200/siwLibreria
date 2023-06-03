@@ -1,5 +1,4 @@
 package it.uniroma3.siw.model;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -13,13 +12,11 @@ public class Book {
 	private String isbn;
 	private String categoria;
 	private String urlImage;
-	@OneToMany(mappedBy="book")
-	private List<Prestito> prestiti;
 	
 	@ManyToOne
 	private Author autore;
 	
-	@OneToOne
+	@OneToOne(mappedBy="book")
 	private Prestito prestito;
 	
 	public Prestito getPrestito() {

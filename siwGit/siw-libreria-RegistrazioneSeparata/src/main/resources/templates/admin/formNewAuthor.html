@@ -5,13 +5,13 @@
 	<title>
 		New Author
 	</title>
-	<link rel="stylesheet" href="/stile.css?version=3" />
+<link rel="stylesheet" href="/css/stile.css" />
 </head>
 
 <body>
 	<div><a href="/"><img src="/libreria-logo.jpg" width="50%"/></a></div>
 	<h1>Aggiungi un autore</h1>
-	<form th:action="@{/Author}" method="POST" th:object="${author}">
+	<form th:action="@{/admin/Author}" method="POST" th:object="${author}">
 		<div>
 			<span th:text="${messaggioErrore}">Errore</span>
 		</div>
